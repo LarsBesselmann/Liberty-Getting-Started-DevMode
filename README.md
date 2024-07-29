@@ -65,7 +65,7 @@ If you are doing this lab as part of an instructor led workshop (virtual or face
 
 Otherwise, you will need to reserve an environment for the lab. You can obtain one here. Follow the on-screen instructions for the “**Reserve now**” option.
 
-<https://techzone.ibm.com/my/reservations/create/63877af037f8a600183c737b>
+<https://techzone.ibm.com/my/reservations/create/660d7f062945d2001e009449>
 
  The lab environment contains one (1) Linux VM, named **Workstation**.
 
@@ -96,26 +96,30 @@ Otherwise, you will need to reserve an environment for the lab. You can obtain o
       ![](./images/media/vnc-connect.png)
 
 
-    e. Enter the password as:  **passw0rd**. Then click the **Send Credentials** button to access the lab environment. 
+    e. Enter the password as:  **`IBMDem0s!`**. Then click the **`Send Credentials`** button to access the lab environment. 
 
-    > Note: That is a numeric zero in passw0rd  
+    > Note: That is a numeric zero in IBMDem0s!  
 
-      ![](./images/media/vnc-password.png)
+      <kbd>![](./images/media/vnc-password.png)</kbd>
 
-2. Login with **ibmdemo** ID.
-    
-    a.  Click on the “**ibmdemo**” icon on the Ubuntu screen.
+	 
+	 <br>
 
-      ![](./images/media/image7.png)
+2. If prompted to Login to the "workstation" VM, use the credetials below: 
 
-    b. When prompted for the password for “**ibmdemo**” user, enter
-    “**passw0rd**” as the password:
-
-    Password: **passw0rd** (lowercase with a zero instead of the o)
+    The login credentials for the **workstation”** VM is:
  
-      ![](./images/media/image8.png)
+     - User ID: **techzone**
 
-    <br/>
+     - Password: **IBMDem0s!**
+
+     > Note: That is a numneric zero in the password
+
+	 <br>
+ 
+     <kbd>![student vm screen](./images/media/techzone-user-pw.png)</kbd>
+	 
+	 <br>
 	
 3.  Once you access the **Student VM** through the published service, you will see the Desktop, which contains all the programs that you will be using (browsers, terminal, etc.)
 
@@ -185,7 +189,28 @@ To begin, navigate to the project directory. Build the “**system”**
 microservice that is provided and deploy it to Open Liberty by running
 the Maven **liberty:run** goal:
 
-1.  Navigate to the project directory. Build the “**system”**
+
+1.  Use the **Activities** Icon to switch to the toolbar, then click the **Terminal** icon to open a Terminal window.
+
+    <!-- LBH: Updated description how to access toolbar -->
+
+    <kbd>![Toolbar_Terminal](./images/media/Toolbar_Terminal.png)</kbd>
+
+2.  Clone the GitHub repo that includes artifacts required for this lab
+    <!-- LBH: Adjusted lab to use Student folder instead of home to store content -->
+
+        mkdir /home/techzone/Student
+
+        cd /home/techzone/Student
+
+        git clone https://github.com/IBMTechSales/appmod-pot-labfiles
+
+    Once completed, the local lab artifacts repo is cloned at the following directory on the desktop VM. 
+    
+    > **/home/techzone/Student/appmod-pot-labfiles**
+
+
+Navigate to the project directory. Build the “**system”**
     microservice that is provided and deploy it to Open Liberty by
     running the Maven **liberty:run** goal:
     
