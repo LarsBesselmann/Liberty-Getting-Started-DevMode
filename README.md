@@ -544,7 +544,7 @@ have been configured.
 
 4.  Use the **docker images** command to find out which Docker images are in the local docker repository
 
-        docker images
+        docker images hello-world
 
     <kbd>![](./images/media/image29.png)</kbd>
 
@@ -562,7 +562,7 @@ have been configured.
 
         docker run -d -p 9086:9080 --name wlp websphere-liberty
 
-    ![](./images/media/image31.png)
+    <kbd>![](./images/media/image31.png)</kbd>
 
     <br/>
 
@@ -572,19 +572,19 @@ have been configured.
 
         docker ps | grep liberty
 
-    ![](./images/media/image32.png)
+    <kbd>![](./images/media/image32.png)</kbd>
 
     b.  The **docker stats** command shows resource usage of the running containers. Use the **Ctrl + C** keys to stop stats
 
         docker stats
 
-    ![](./images/media/image33.png)
+    <kbd>![](./images/media/image33.png)</kbd>
 
     <br/>
 
 8.  Open the Web browser on the VM and access Liberty running in the container: **http://localhost:9086**
 
-    ![](./images/media/image34.png)
+    <kbd>![](./images/media/image34.png)<kbd>
 
     <br/>
 
@@ -592,7 +592,7 @@ have been configured.
 
         docker logs wlp
 
-    ![](./images/media/image35.png)
+    <kbd>![](./images/media/image35.png)</kbd>
 
     <br/>
 
@@ -645,15 +645,15 @@ preconfigured Open Liberty server.
 
     **The Dockerfile performs the following tasks:**
 
-    ![](./images/media/image36.png)
+    <kbd>![](./images/media/image36.png)</kbd>
 
     **Read below for a short description and details of the commands in the Dockerfile:**
 
-    - **FROM openliberty/open-liberty:kernel-java8-openj9-ubi**
+    - **FROM openliberty/open-liberty:kernel-java11-openj9-ubi**
     
         FROM specifies the Docker image that is to be used. If this is not in the local repository, this will be pulled from Docker Hub.
     
-        In this example, we pull the liberty kernel image that contains Java 8, and uses the RedHat Universal base Images for deployments to OpenShift.
+        In this example, we pull the liberty kernel image that contains Java 11, and uses the RedHat Universal base Images for deployments to OpenShift.
     
         The **kernel** image contains just the Liberty kernel and no additional runtime features. This image is the recommended basis for custom built images, so that they can contain only the features required for a specific application
 
@@ -673,47 +673,52 @@ preconfigured Open Liberty server.
 
     - **COPY --chown=1001:0 src/main/liberty/config/ /config/**
     
-        The COPY command copies the liberty configuration file (server.xml) to the /config folder in the Liberty container.
+        The COPY command will copy the liberty configuration file (server.xml) to the /config folder in the Liberty container.
     
         The RedHat Universal Base Images (UBI) are built such that Liberty does not run as root. To ensure that Liberty can access the files that are copied to the image, they must be owned by a non-root user.
 
         All Liberty images from IBM contain a non- root user defined as **1001:0**. So the copy command copies the files as the non-root user that is known to exist on the LIBERTY image.
 
-        
+    
+    - **RUN features.sh**
+    
+        The features.sh script will add the requested XML snippets to enable Liberty features and grow the image to be fit-for-purpose using featureUtility.
+
+        <br/>
+    
 
     - **COPY --chown=1001:0 target/\*.war /config/apps/**
     
-        The COPY command copies the application WAR file to the /config/apps directory on the image.
+        The COPY command will copy the application WAR file to the /config/apps directory on the image.
 
         
 
     - **RUN configure.sh**
     
-        The configure.sh script installs the required Liberty features based on the features defined in the server configuration file (server.xml). This script is baked into ALL Liberty and tWAS Docker images provided by IBM.
+        The configure.sh script will add the requested server configurations, apply any interim fixes and populate caches to optimize the runtime.
 
         <br/>
 
-3.  Run the **mvn package** command from the **demo-project** directory. The command will produce a war file named "**guide-getting-started.war**” and copied to the “**target**” directory.
+3.  Run the **mvn package** command from the **start** directory. The command will produce a war file named "**guide-getting-started.war**” and copied to the “**target**” directory.
 
         mvn package
 
-    ![](./images/media/image37.png)
+    <kbd>![](./images/media/image37a.png)</kbd>
+    <kbd>![](./images/media/image37b.png)</kbd>
 
     The Maven package command builds the application and produces an application deployable binary “.war” file that is copied into the Docker image via the Dockerfile.
 
     <br/>
 
-4. Run the following command to download or update to the latest Open iberty Docker image used in our Dockerfile:
+4. Run the following command to download or update to the latest Open Liberty Docker image used in our Dockerfile:
 
-        docker pull openliberty/open-liberty:kernel-java8-openj9-ubi
+        docker pull icr.io/appcafe/open-liberty:kernel-slim-java11-openj9-ubi
 
-    **Note:** The image has already been pulled onto this VM. So, you may only see a message indicating the image is already up to date, rather than pulling the image again.
+    **Note:** If the image has already been pulled onto this VM, you may only see a message indicating the image is already up to date, rather than pulling the image again.
 
-    ![](./images/media/image38.png)
-
-    OR, you might see this message if the latest image is already pulled.
-
-    ![](./images/media/image39.png)
+    <kbd>![](./images/media/image38.png)</kbd>
+    or
+    <kbd>![](./images/media/image39.png)</kbd>
 
     <br/>
 
@@ -725,7 +730,7 @@ preconfigured Open Liberty server.
 
         docker build -t openliberty-getting-started:1.0-SNAPSHOT .
 
-    ![](./images/media/image40.png)
+    <kbd>![](./images/media/image40.png)</kbd>
 
 
     The Docker **openliberty-getting-started:1.0-SNAPSHOT** image is built from the **Dockerfile**.
@@ -738,7 +743,7 @@ preconfigured Open Liberty server.
 
     Your image should be listed as “**openliberty-getting-started**” with the TAG of “**1.0-SNAPSHOT**”
 
-    ![](./images/media/image41.png)
+    <kbd>![](./images/media/image41.png)</kbd>
 
     <br/>
 
@@ -746,7 +751,7 @@ preconfigured Open Liberty server.
 
         docker run -d --name gettingstarted-app -p 9080:9080 openliberty-getting-started:1.0-SNAPSHOT
 
-    ![](./images/media/image42.png)
+    <kbd>![](./images/media/image42.png)</kbd>
 
 
     There is a bit going on in that command; so, here is a short description of the parameters on the command. And the final argument on the command is the Docker image name.
@@ -757,16 +762,16 @@ preconfigured Open Liberty server.
 
 8.  Run the **docker ps** command to verify your docker container is  running
 
-        docker ps | grep getting-started
+        docker ps -l
 
-    ![](./images/media/image44.png)
+    <kbd>![](./images/media/image44.png)</kbd>
 
     <br/>
 
 9.  From a Web Browser, access the application using:
     **http://localhost:9080/system/properties**
     
-    ![](./images/media/image45.png)
+    <kbd>![](./images/media/image45.png)</kbd>
 
     <br/>
 
@@ -800,24 +805,28 @@ restarts the container as necessary.
 
         mvn liberty:devc
 
-    a.  When you see the massage: “**liberty is running in dev mode**”, Open Liberty is ready to run in dev mode:
+    a.  When you see the message: “**Liberty is running in dev mode**”, Open Liberty is ready to run in dev mode:
     
-    ![](./images/media/image46.png)
-
+    <kbd>![](./images/media/image46.png)</kbd>
+    
     <br/>
+
+    |         |           |  
+    | ------------- |:-------------|
+    | ![](./images/media/image11.png?cropResize=100,100)   | <p><strong>IMPORTANT:</strong></p><p>In the console, you might see error like this: </p><p>![](./images/media/image46a.png)</p><p>You can ignore those messages.</p>     |
 
 2.  Open another Terminal window and run the **docker ps** command to verify that the container is started.
 
-        docker ps | grep getting-started
+        docker ps -l
 
-    ![](./images/media/image47.png)
+    <kbd>![](./images/media/image47.png)</kbd>
 
     <br/>
 
 3.  From a Web Browser, access the application using:
     **http://localhost:9080/system/properties**
     
-    ![](./images/media/image48.png)
+    <kbd>![](./images/media/image48.png)</kbd>
     
     Dev mode automatically picks up changes that you make to your
     application and allows you to run tests by pressing the
@@ -836,7 +845,7 @@ restarts the container as necessary.
         running, press the **ENTER** key to run the tests. You will see
         that the test runs with no failures, as illustrated below.
         
-    ![](./images/media/image49.png)
+    <kbd>![](./images/media/image49.png)</kbd>
 
 
     |         |           |  
@@ -857,13 +866,13 @@ restarts the container as necessary.
 
     c.  Make the following minor change to the server.xml file
 
-    **Change the highlighted line:**
+    **In the webApplication element, change the highlighted contextRoot:**
  
-    ![](./images/media/image50.png)
+    <kbd>![](./images/media/image50.png)</kbd>
 
-    **Updated to read:** contextRoot=”/**dev**” /\>
+    **Updated contextRoot element:** contextRoot="/**dev**" /\>
 
-     ![](./images/media/image51.png)
+     <kbd>![](./images/media/image51.png)</kbd>
 
     d.  **Save** the file and **close** the gedit editor.
 
@@ -873,13 +882,13 @@ restarts the container as necessary.
     
     Notice that context root is now **/dev**
     
-    ![](./images/media/image52.png)
+    <kbd>![](./images/media/image52.png)</kbd>
 
     <br/>
 
     |         |           |  
     | ------------- |:-------------|
-    | ![](./images/media/image11.png?cropResize=100,100)   | <p><strong>IMPORTANT:</strong></p><p>We encountered situations where the container got mapped to Docker host port 9081 instead of 9080.</p><p>![](./images/media/image53.png)</p><p>This happens when the new container comes up before the old container ports have been freed. To get the container back to port 9080, devc or do a minor change to the server.xml..</p> |
+    | ![](./images/media/image11.png?cropResize=100,100)   | <p><strong>IMPORTANT:</strong></p><p>We encountered situations where the container got mapped to Docker host port 9081 instead of 9080.</p><p>![](./images/media/image53.png)</p><p>This happens when the new container comes up before the old container ports have been freed. To get the container back to port 9080, restart devc or do a minor change to the server.xml..</p> |
 
 
 7.  Rerun the integration test that is included in the application roject.
@@ -889,7 +898,7 @@ restarts the container as necessary.
         that the test runs, but now FAILS because a 404 HTTP response
         code was returned, using the original context root.
         
-    ![](./images/media/image54.png)
+    <kbd>![](./images/media/image54.png)</kbd>
         
     **Note:** For the test case to **PASS**, the test case itself would need to be updated to reflect invoking the system/properties service using the new /dev context root. This activity is beyond the scope of this lab. However, you will explore the tests in greater detail in a subsequent lab.
 
@@ -908,7 +917,7 @@ restarts the container as necessary.
 
         docker ps | grep getting-started
 
-    ![](./images/media/image55.png)
+    <kbd>![](./images/media/image55.png)</kbd>
 
 
 **Congratulations**\! You have successfully completed the lab “Getting
