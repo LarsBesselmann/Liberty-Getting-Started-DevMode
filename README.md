@@ -123,6 +123,7 @@ Otherwise, you will need to reserve an environment for the lab. You can obtain o
 	
 3.  Once you access the **Student VM** through the published service, you will see the Desktop, which contains all the programs that you will be using (browsers, terminal, etc.)
 
+
   <br/>
 
 
@@ -156,8 +157,17 @@ Otherwise, you will need to reserve an environment for the lab. You can obtain o
  
 
 3. An alternative to using the noVNC Copy / Paste option, you may consider opening the lab guide in a web browser inside of the VM. Using this method, you can easily copy / paste text from the lab guide without having to use the noVNC clipboard. 
+<br>
 
 
+<!-- LBH: Added description how to access toolbar -->
+4. Click on the **`Activities`** icon within the VM to switch between different windows or get access the tool bar.
+    <kbd>![Activities](./images/media/Activies.png)</kbd>
+
+    You will see the toolbar.
+
+    <kbd>![Toolbar_Terminal](./images/media/Toolbar.png)</kbd>
+    
     <br>
 
 ### If, at aytime during the lab, you ar asked to install updates, click CANCEL!
@@ -199,25 +209,25 @@ the Maven **liberty:run** goal:
 2.  Clone the GitHub repo that includes artifacts required for this lab
     <!-- LBH: Adjusted lab to use Student folder instead of home to store content -->
 
-        mkdir /home/techzone/Student
+        mkdir -p /home/techzone/Student/labs
 
-        cd /home/techzone/Student
-
-        git clone https://github.com/IBMTechSales/appmod-pot-labfiles
+        git clone https://github.com/openliberty/guide-getting-started.git /home/techzone/Student/labs/devmode
+        
+        cd /home/techzone/Student/labs/devmode
 
     Once completed, the local lab artifacts repo is cloned at the following directory on the desktop VM. 
     
-    > **/home/techzone/Student/appmod-pot-labfiles**
+    > **/home/techzone/Student/labs/devmode**
 
 
-Navigate to the project directory. Build the “**system”**
+3. To begin, navigate to the start directory. Build the “**system”**
     microservice that is provided and deploy it to Open Liberty by
     running the Maven **liberty:run** goal:
     
     a.  Open a terminal window and change to the directory
-        **/home/ibmdemo/Student/labs/devmode/demo-project**
+        **/home/techzone/Student/labs/devmode/start**
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
     b.  Run the mvn libert:run command to start the Liberty server
         
@@ -234,19 +244,25 @@ Navigate to the project directory. Build the “**system”**
  
     **The server defaultServer is ready to run a smarter planet.**
 
-    ![](./images/media/image13.png)
+    <kbd>![](./images/media/image13.png)</kbd>
 
     <br/>
 
 2.  Access the “system” microservice that was deployed to the Liberty
     server.
     
-    a.  Open the Web Browser from inside of the VM and go to the URL below. The microservice lists various system properties of
+    a. Use the **Activities** Icon to switch to the toolbar, then click the **Firefox** icon to open a Firefox browser window.
+
+    <!-- LBH: Updated description how to access toolbar -->
+
+    <kbd>![Toolbar_Terminal](./images/media/Toolbar_Firefox.png)</kbd>
+    
+    Go to the URL below. The microservice lists various system properties of
         your JVM.
 
         http://localhost:9080/system/properties
     
-    ![](./images/media/image14.png)
+    <kbd>![](./images/media/image14.png)</kbd>
 
     <br/>
 
@@ -266,13 +282,13 @@ Navigate to the project directory. Build the “**system”**
     
     a.  From a Terminal window, navigate to the following directory
      
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
     b.  View the relevant plugin in the pom.xml file. The -A and -B options on the grep command display the specified number of lines before and after the location of the search text string.
 
         cat pom.xml | grep -B 4 -A 2 liberty-maven-plugin
 
-    ![](./images/media/image15.png)
+    <kbd>![](./images/media/image15.png)</kbd>
 
 
 
@@ -294,7 +310,7 @@ quicker turnarounds and an improved developer experience.
     
     a.  From a Terminal window, navigate to the following directory
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
     b.  Ensure the Liberty server is STOPPED\!
 
@@ -306,7 +322,7 @@ quicker turnarounds and an improved developer experience.
 
     **Note:** The Liberty is now started in dev mode.
 
-    ![](./images/media/image16.png)
+    <kbd>![](./images/media/image16.png)
 
     Dev mode automatically picks up changes that you make to your application and allows you to run tests by pressing the **enter/return** key in the active command-line session. When you’re working on your application, rather than rerunning Maven commands, press the enter/return key to verify your change, which executes your tests.
 
@@ -318,7 +334,7 @@ quicker turnarounds and an improved developer experience.
 
         http://localhost:9080/ 
 
-    ![](./images/media/image17.png)
+    <kbd>![](./images/media/image17.png)</kbd>
 
     <br/>
 
@@ -326,23 +342,28 @@ quicker turnarounds and an improved developer experience.
     while running in dev mode, to see the changes dynamically picked
     up and applied to the running server.
     
-    a.  Open a **new terminal window** and navigate to **src/main/webapp** folder of the application as illustrated below.
+    a. Click on **Activities** to access the **Toolbar**, then right-click on **Terminal** to open a **new terminal window**.
+    
+    <kbd>![Toolbar_New_Terminal](./images/media/Toolbar_New_Terminal.png)</kbd>
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project/src/main/webapp
+    
+    b. In the new terminal window, navigate to **src/main/webapp** folder of the application as illustrated below.
 
-    b.  Use the gedit editor to open the **index.html** file in edit mode
+        cd /home/techzone/Student/labs/devmode/start/src/main/webapp
+
+    c.  Use the gedit editor to open the **index.html** file in edit mode
 
         gedit index.html
         
     c.  Make the following minor change to the index.html page on or about line number 25.
 
-    **Change the highlighted line:**
+    **Change title in the highlighted line:**
  
-    ![](./images/media/image18.png)
+    <kbd>![](./images/media/image18.png)</kbd>
 
-    **Updated to read:** System Properties Demo
+    **Updated title:** System Properties Demo
 
-    ![](./images/media/image19.png)
+    <kbd>![](./images/media/image19.png)</kbd>
 
     d.  **Save** the file and **close** the gedit editor.
 
@@ -356,12 +377,12 @@ quicker turnarounds and an improved developer experience.
 
     b.  **IMPORTANT**: Click the **RELOAD** icon in the browser to reload the page. Browsers cache content, so you need to reload the page.
     
-    ![](./images/media/image20.png)
+    <kbd>![](./images/media/image20.png)</kbd>
 
     c.  The updated index.html page is displayed with your changes
     dynamically picked up 
 
-    ![](./images/media/image21.png)
+    <kbd>![](./images/media/image21.png)</kbd>
 
     The application code changes were detected and dynamically applied to the running instance of the Liberty server.
 
@@ -391,15 +412,15 @@ because the **/health** endpoint does not yet exist:
 
     > Note: you see a 404 error because the **/health** endpoint does not yet exist
  
-    ![](./images/media/image22.png)
+    <kbd>![](./images/media/image22.png)</kbd>
 
     <br/>
 
-2.  Make a simple change to the Liberty Server configuration file to add **the mpHealth-2.2** feature to the server.xml file, which enables the health check endpoint.
+2.  Make a simple change to the Liberty Server configuration file to add **the mpHealth-4.0** feature to the server.xml file, which enables the health check endpoint.
     
     a  From a terminal window, navigate to **liberty/config** folder of the application
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project/src/main/liberty/config
+        cd /home/techzone/Student/labs/devmode/start/src/main/liberty/config
 
     b.  Use the gedit editor to open the **server.xml** file in edit mode
 
@@ -407,13 +428,13 @@ because the **/health** endpoint does not yet exist:
 
     c.  Make the following minor change to the server.xml file
 
-    **Change the highlighted line:**
+    **Add a line to the featureManager section:**
  
-    ![](./images/media/image23.png)
+    <kbd>![](./images/media/image23.png)</kbd>
 
-    **Updated to include:** \<feature\>mpHealth-2.2\</feature\>
+    **Updated to include:** \<feature\>mpHealth-4.0\</feature\>
 
-    ![](./images/media/image24.png)
+    <kbd>![](./images/media/image24.png)</kbd>
 
     d.  **Save** the file and **close** the gedit editor.
 
@@ -425,18 +446,18 @@ because the **/health** endpoint does not yet exist:
 
         http://localhost:9080/health
 
-    ![](./images/media/image25.png)
+    <kbd>![](./images/media/image25.png)</kbd>
 
     <br/>
 
-4.  View the Liberty server console log to see the **mpHealth-2.2** feature was installed, and the health endpoint enabled.
+4.  View the Liberty server console log to see the **mpHealth-4.0** feature was installed, and the health endpoint enabled.
 
     a.  Return to the Terminal window where the **mvn liberty:dev** is
     running.
 
-    b.  Review the messages that indicate the **mpHealth-22** feature was dynamically installed and the **/health** endpoint enabled.
+    b.  Review the messages that indicate the **mpHealth-4.0** feature was dynamically installed and the **/health** endpoint enabled.
     
-    ![](./images/media/image26.png)
+    <kbd>![](./images/media/image26.png)</kbd>
 
     The Liberty server configuration changes were detected and dynamically applied to the running instance of the Liberty server.
 
@@ -509,7 +530,7 @@ have been configured.
 
         docker --version
 
-    ![](./images/media/image27.png)
+    <kbd>![](./images/media/image27.png)</kbd>
 
     <br/>
 
@@ -517,7 +538,7 @@ have been configured.
 
         docker run --name hello-world hello-world 
 
-    ![](./images/media/image28.png)
+    <kbd>![](./images/media/image28.png)</kbd>
 
     <br/>
 
@@ -525,7 +546,7 @@ have been configured.
 
         docker images
 
-    ![](./images/media/image29.png)
+    <kbd>![](./images/media/image29.png)</kbd>
 
     <br/>
 
@@ -533,7 +554,7 @@ have been configured.
 
         docker history hello-world
 
-    ![](./images/media/image30.png)
+    <kbd>![](./images/media/image30.png)</kbd>
 
     <br/>
 
@@ -605,7 +626,7 @@ preconfigured Open Liberty server.
 
 1.  From a Terminal window, STOP the running Liberty Server from the previous section of the lab, using the commands below:
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
         mvn liberty:stop
 
@@ -613,9 +634,9 @@ preconfigured Open Liberty server.
 2.  View the Dockerfile that is used to build the docker image.
     
     a.  Open a terminal window and change to the directory:
-        **/home/ibmdemo/Student/labs/devmode/demo-project**
+        **/home/techzone/Student/labs/devmode/start**
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
     b.  Investigate the Dockerfile
 
@@ -700,7 +721,7 @@ preconfigured Open Liberty server.
     
     **Note:** The **dot** at the end of the docker build command is part of the command, indicating to use the current directory path.
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project
+        cd /home/techzone/Student/labs/devmode/start
 
         docker build -t openliberty-getting-started:1.0-SNAPSHOT .
 
@@ -828,7 +849,7 @@ restarts the container as necessary.
     a.  From a terminal window, navigate to the **liberty config**
         folder of the application
 
-        cd /home/ibmdemo/Student/labs/devmode/demo-project/src/main/liberty/config 
+        cd /home/techzone/Student/labs/devmode/start/src/main/liberty/config 
 
     b.  Use the gedit editor to open the **server.xml** file in edit mode
 
