@@ -73,7 +73,6 @@ Otherwise, you will need to reserve an environment for the lab. You can obtain o
     
   The Ubuntu Linux **Workstation** VM has the following software installed for the lab:
   
-  - Application Project with Liberty
   - Maven 3.6.0 
 
   <br/>
