@@ -74,6 +74,7 @@ Otherwise, you will need to reserve an environment for the lab. You can obtain o
   The Ubuntu Linux **Workstation** VM has the following software installed for the lab:
   
   - Maven 3.6.0 
+  - IBM Semeru Runtime Open Edition 17.0.8.1
 
   <br/>
 
